@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anita My World Clone</title>
+    <!-- Mengambil Font dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Mengambil Icon dari FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLING --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0f0c29;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Container Utama */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Efek Background Bergerak (Orbs) */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: float 10s infinite ease-in-out;
+        }
+        .orb-1 {
+            width: 200px;
+            height: 200px;
+            background: #ff00cc;
+            top: 10%;
+            left: 20%;
+        }
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: #3333ff;
+            bottom: 10%;
+            right: 20%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        /* Kartu Profil (Glassmorphism) */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Foto Profil */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 15px;
+            animation: spin 10s linear infinite;
+            animation-play-state: paused; /* Pause saat tidak hover */
+        }
+        
+        .profile-img:hover {
+            animation-play-state: running; /* Putar saat di-hover */
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Teks Nama & Bio */
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        p.bio {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        /* Tombol Link */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .link-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Animasi Fade In */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Musik Player Kecil */
+        .music-player {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .music-icon {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Elemen Background -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <div class="profile-card">
+            <!-- GANTI FOTO PROFIL DI SINI -->
+            <img src="https://i.pinimg.com/564x/d1/8e/35/d18e3532424242424242424242424242.jpg" alt="Profile Picture" class="profile-img">
+            
+            <!-- GANTI NAMA DI SINI -->
+            <h1>Anita My World</h1>
+            
+            <!-- GANTI BIO DI SINI -->
+            <p class="bio">Content Creator | Gamer | Dreamer ✨</p>
+
+            <!-- DAFTAR LINK SOSIAL MEDIA -->
+            <div class="links">
+                <a href="https://instagram.com" target="_blank" class="link-btn">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="link-btn">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://youtube.com" target="_blank" class="link-btn">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="https://wa.me/628123456789" target="_blank" class="link-btn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+
+            <!-- MUSIK PLAYER (Opsional) -->
+            <div class="music-player">
+                <i class="fas fa-music music-icon"></i>
+                <span>Playing: Lo-Fi Beats</span>
+            </div>
+            <!-- Audio Tag (Ganti src dengan link lagu mp3 kamu) -->
+            <audio id="bg-music" loop>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT ---
+        
+        // Fitur Klik untuk Memutar Musik (Browser modern memblokir autoplay)
+        const music = document.getElementById('bg-music');
+        const musicIcon = document.querySelector('.music-icon');
+        let isPlaying = false;
+
+        // Coba putar musik saat halaman dimuat
+        window.addEventListener('click', () => {
+            if (!isPlaying) {
+                music.play();
+                musicIcon.style.animationPlayState = 'running';
+                isPlaying = true;
+            } else {
+                music.pause();
+                musicIcon.style.animationPlayState = 'paused';
+                isPlaying = false;
+            }
+        }, { once: true }); // Hanya trigger sekali saat klik pertama
+
+        // Efek ketikan sederhana pada nama (Opsional)
+        const nameElement = document.querySelector('h1');
+        const originalText = nameElement.innerText;
+        nameElement.innerText = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                nameElement.innerText += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Jalankan efek ketikan setelah delay sedikit
+        setTimeout(typeWriter, 500);
+
+    </script>
+</body>
+</html>

@@ -3,163 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My World</title>
-    <!-- Font Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Icon FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <title>My World 🌍</title>
     <style>
-        /* --- CSS (Tampilan) --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
+        /* --- BAGIAN CSS (Gaya Tampilan) --- */
         body {
-            background: #0f0c29;
-            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            overflow-x: hidden;
+            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; background: #fecfef; font-family: 'Arial', sans-serif; overflow-x: hidden;
         }
-
-        /* Animasi Background */
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(80px); z-index: -1; animation: float 10s infinite ease-in-out;
+        .container {
+            text-align: center; background: rgba(255, 255, 255, 0.9);
+            padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 90%; max-width: 400px; z-index: 10;
         }
-        .orb-1 { width: 200px; height: 200px; background: #ff00cc; top: 10%; left: 20%; }
-        .orb-2 { width: 250px; height: 250px; background: #3333ff; bottom: 10%; right: 20%; animation-delay: -5s; }
-        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -20px); } }
-        
-        .container { width: 100%; max-width: 400px; padding: 20px; text-align: center; position: relative; z-index: 1; }
-        
-        /* Kartu Kaca (Glassmorphism) */
-        .profile-card {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px;
-            padding: 40px 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 20px; animation: fadeIn 1s ease-out;
+        /* Style Foto/Gambar */
+        .main-image {
+            width: 100%; border-radius: 15px; margin-bottom: 20px;
+            display: block; object-fit: cover; height: 250px;
         }
-        
-        .profile-img {
-            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.5); margin-bottom: 15px;
-            animation: spin 10s linear infinite; animation-play-state: paused;
+        /* Style Video */
+        .main-video {
+            width: 100%; border-radius: 15px; margin-bottom: 20px; display: none;
         }
-        .profile-img:hover { animation-play-state: running; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        h1 { font-size: 1.5rem; margin-bottom: 5px; font-weight: 600; }
-        p.bio { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 20px; }
-        
-        .links { display: flex; flex-direction: column; gap: 15px; }
-        .link-btn {
-            display: flex; align-items: center; justify-content: center;
-            padding: 12px; background: rgba(255, 255, 255, 0.1); color: white;
-            text-decoration: none; border-radius: 12px; transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        h1 { color: #ff4757; font-size: 1.8rem; margin: 10px 0; }
+        p { color: #555; line-height: 1.5; }
+        .btn-container { position: relative; height: 100px; margin-top: 20px; }
+        button {
+            padding: 12px 25px; border: none; border-radius: 50px;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
         }
-        .link-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        .link-btn i { margin-right: 10px; font-size: 1.2rem; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .music-player { margin-top: 20px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .music-icon { animation: bounce 1s infinite; }
-        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        #btn-yes { background: #ff4757; color: white; }
+        #btn-no { background: #ddd; color: #333; position: absolute; left: 50%; transform: translateX(20px); }
+        #message { display: none; margin-top: 20px; }
+        .heart { position: absolute; color: #ff4757; animation: float 4s linear infinite; }
+        @keyframes float { 0% { transform: translateY(100vh) scale(0); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- Background Animation -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
     <div class="container">
-        <div class="profile-card">
-            <!-- Foto Profil -->
-            <img id="profile-pic" src="" alt="Profile Picture" class="profile-img">
-            
-            <!-- Nama & Bio -->
-            <h1 id="username">Loading...</h1>
-            <p id="bio" class="bio">Loading...</p>
+        <img id="myImage" class="main-image" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500" alt="Foto">
 
-            <!-- Daftar Link (Akan diisi otomatis oleh Javascript) -->
-            <div id="link-container" class="links"></div>
+        <video id="myVideo" class="main-video" controls>
+            <source src="video-kamu.mp4" type="video/mp4">
+        </video>
 
-            <!-- Musik Player -->
-            <div class="music-player">
-                <i class="fas fa-music music-icon"></i>
-                <span id="music-text">Tap to Play Music</span>
-            </div>
-            <audio id="bg-music" loop></audio>
+        <h1 id="titleText">Halo Anita! ✨</h1>
+        <p id="descText">I just want to say that you are the best part of my world. Do you know how much I like you?</p>
+
+        <div class="btn-container" id="controls">
+            <button id="btn-yes" onclick="showLove()">Banget!</button>
+            <button id="btn-no" onmouseover="moveNo()">Nggak</button>
+        </div>
+
+        <div id="message">
+            <h2 style="color: #ff4757;">Yeay! I Love You Too! ❤️</h2>
+            <p>Terima kasih sudah ada di duniaku.</p>
         </div>
     </div>
 
+    <audio id="mySong" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="hearts"></div>
+
     <script>
-        // ==========================================
-        // --- KONFIGURASI (EDIT DI SINI) ---
-        // ==========================================
+        /* --- BAGIAN EDIT GAMPANG --- */
+        const config = {
+            title: "Untuk Anita 🌸",
+            description: "Setiap hari bersamamu adalah anugerah. Kamu mau jadi duniaku selamanya?",
+            imageURL: "https://images.unsplash.com/photo-1516589174184-c68526617af0?w=500", // Ganti link foto di sini
+            useVideo: false, // Ubah jadi true jika ingin menampilkan video sebagai ganti foto
+            videoURL: "link-video-kamu.mp4"
+        };
+
+        // Menerapkan perubahan teks dari config
+        document.getElementById('titleText').innerText = config.title;
+        document.getElementById('descText').innerText = config.description;
+        document.getElementById('myImage').src = config.imageURL;
         
-        // 1. Foto Profil (Ganti link gambar di bawah)
-        const myPhoto = "https://i.pinimg.com/564x/d1/8e/35/d18e3532424242424242424242424242.jpg"; 
+        if(config.useVideo) {
+            document.getElementById('myImage').style.display = 'none';
+            document.getElementById('myVideo').style.display = 'block';
+        }
 
-        // 2. Nama & Bio
-        const myName = "Anita My World";
-        const myBio = "Content Creator | Gamer | Dreamer ✨";
+        function moveNo() {
+            const btnNo = document.getElementById('btn-no');
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
 
-        // 3. Daftar Link (Bisa tambah banyak)
-        // Icon: fa-instagram, fa-tiktok, fa-youtube, fa-whatsapp, fa-github, fa-linkedin, dll
-        const myLinks = [
-            { icon: "fab fa-instagram", text: "Instagram", url: "https://instagram.com/username_kamu" },
-            { icon: "fab fa-tiktok", text: "TikTok", url: "https://tiktok.com/@username_kamu" },
-            { icon: "fab fa-youtube", text: "YouTube", url: "https://youtube.com/channel_kamu" },
-            { icon: "fab fa-whatsapp", text: "WhatsApp", url: "https://wa.me/628123456789" },
-            { icon: "fas fa-globe", text: "Website Pribadi", url: "https://websitekamu.com" }
-        ];
+        function showLove() {
+            document.getElementById('controls').style.display = 'none';
+            document.getElementById('descText').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('mySong').play(); // Memutar lagu
+            setInterval(createHeart, 300);
+        }
 
-        // 4. Musik (Ganti link MP3 di bawah)
-        const myMusic = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-
-        // ==========================================
-        // --- JANGAN UBAH KODE DI BAWAH INI ---
-        // ==========================================
-
-        // Set Data ke HTML
-        document.getElementById('profile-pic').src = myPhoto;
-        document.getElementById('username').innerText = myName;
-        document.getElementById('bio').innerText = myBio;
-        document.getElementById('bg-music').src = myMusic;
-
-        // Generate Link Buttons
-        const linkContainer = document.getElementById('link-container');
-        myLinks.forEach(link => {
-            const a = document.createElement('a');
-            a.className = 'link-btn';
-            a.href = link.url;
-            a.target = '_blank'; // Buka di tab baru
-            a.innerHTML = `<i class="${link.icon}"></i> ${link.text}`;
-            linkContainer.appendChild(a);
-        });
-
-        // Fitur Musik (Klik untuk play/pause)
-        const music = document.getElementById('bg-music');
-        const musicText = document.getElementById('music-text');
-        let isPlaying = false;
-
-        document.body.addEventListener('click', () => {
-            if (!isPlaying) {
-                music.play();
-                musicText.innerText = "Now Playing...";
-                isPlaying = true;
-            } else {
-                music.pause();
-                musicText.innerText = "Tap to Play Music";
-                isPlaying = false;
-            }
-        }, { once: true }); // Trigger sekali saat pertama kali klik
-
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
     </script>
 </body>
 </html>
